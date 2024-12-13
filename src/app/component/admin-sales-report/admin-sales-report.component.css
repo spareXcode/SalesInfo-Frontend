@@ -1,0 +1,24 @@
+.custom-calendar {
+    width: 200px; /* Component width */
+    font-size: 12px; /* Font size for the input and calendar */
+  }
+  
+  .custom-calendar .p-datepicker {
+    transform: scale(0.8); /* Shrinks the calendar popup */
+    width: 200px; /* Adjusts the calendar width */
+  }
+  
+  .custom-calendar .p-inputtext {
+    height: 30px; /* Adjust input box height */
+    font-size: 12px; /* Font size for input box text */
+  }
+  select.w-20.lg\:w-36.h-8.rounded.flex.items-center.justify-center.ng-untouched.ng-pristine.ng-valid {
+    font-size: 15px;
+    padding: 5px;
+    background: #f9f9f9;
+}
+select.w-20.lg\:w-36.h-8.rounded.flex.items-center.justify-center.ng-pristine.ng-valid.ng-touched {
+  font-size: 15px;
+  padding: 5px;
+  background: #f9f9f9;
+}

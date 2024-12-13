@@ -1,0 +1,160 @@
+<div class="relative w-full h-full">
+  <!-- Loading spinner -->
+  <!-- <div
+    *ngIf="isLoading"
+    class="absolute inset-0 bg-white bg-opacity-70 z-50 flex items-center justify-center"
+  >
+    <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+  </div> -->
+
+  <div class="w-full h-full flex flex-col overflow-y-auto overflow-x-hidden">
+    <app-topbar></app-topbar>
+    <div
+      class="sm:grid sm:grid-cols-3 lg:p-5 w-auto lg:h-14 lg:flex lg:flex-row lg:justify-start lg:items-center lg:gap-5 bg-customgreen shadow-lg"
+      [formGroup]="AdminSalesReportInputData"
+    >
+      <!-- Mobile Menu Button -->
+      <button
+        class="lg:hidden md:hidden text-white bg-customgreen rounded-lg w-10 h-10 flex justify-center items-center"
+        (click)="isMenuOpen = !isMenuOpen"
+      >
+        <!-- Hamburger Icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
+      <!-- Menu Items -->
+      <div
+        class="md:flex md:flex-row md:items-center gap-3 pl-2 grid grid-cols-2 sm:grid-cols-2 sm: gap-x-10 sm:gap-5"
+        [ngClass]="{ hidden: !isMenuOpen, flex: isMenuOpen }"
+      >
+        <select
+          name=""
+          id=""
+          class="w-36 sm:w-20 h-8 rounded"
+          formControlName="BrandID"
+          (change)="onSelectionChangeBrandData()"
+        >
+          <option value="" disabled selected hidden>Brand</option>
+          @if (BrandData.length == 0) {
+          <option value="">No Brands Available</option>
+          } @else { @for (brand of BrandData; track $index) {
+          <option value="{{ brand.bigid }}">{{ brand.vcbrand }}</option>
+          } }
+        </select>
+        <select
+          name=""
+          id=""
+          class="w-36 sm:w-20 h-8 rounded"
+          formControlName="DealerID"
+          (change)="onSelectionChangeDealerData()"
+        >
+          <option value="" disabled selected hidden>Dealer</option>
+          @if (DealerData.length == 0) {
+          <option value="">No Dealer Available</option>
+          } @else { @for (Dealer of DealerData; track $index) {
+          <option value="{{ Dealer.dealerid }}">{{ Dealer.dealer }}</option>
+          } }
+        </select>
+        <select
+          name=""
+          id=""
+          class="w-36 sm:w-20 lg:w-36 h-8 rounded"
+          formControlName="LocationID"
+          (change)="onSelectionChangeLocationData()"
+        >
+          <option value="" class="text-gray-300" disabled selected hidden>
+            Select Location
+          </option>
+          @if (LocationData == 0) {
+          <option value="">No Location Available</option>
+          } @else { @for (location of LocationData; track $index) {
+          <option [value]="location.locationid">{{ location.location }}</option>
+          } }
+        </select>
+        <input
+          type="text"
+          class="w-36 sm:w-24 h-8 rounded p-2"
+          formControlName="FormDate"
+          placeholder="From Date"
+          onfocus="(this.type='Month')"
+          onblur="(this.type='text')"
+        />
+        <input
+          type="text"
+          class="w-36 sm:w-24 h-8 rounded p-2"
+          formControlName="ToDate"
+          placeholder="To Date"
+          onfocus="(this.type='Month')"
+          onblur="(this.type='text')"
+        />
+        <input
+          type="text"
+          class="w-36 lg:w-64 h-8 rounded p-4"
+          placeholder="Enter Part Number"
+          formControlName="PartNumber"
+        />
+        <button
+          class="bg-blue-600 hover:bg-green-500 rounded-xl text-white w-24 sm:h-10 h-7 mb-4 mt-4 sm:text-sm shadow-lg cursor-pointer"
+          (click)="onSubmitAdminInputData()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+
+    <div class="flex w-screen mt-11 h-full items-center justify-start flex-col">
+      <img
+        src="Background_image.png"
+        alt="Background"
+        class="absolute inset-0 w-full h-full object-cover -z-10"
+      />
+      <div class="w-full h-auto flex flex-col">
+        <!-- Heading -->
+        <h1 class="text-xl ml-10">Part Details</h1>
+
+        <!-- Table -->
+        <app-product-desctiption-table
+          [PartDetails]="PartDetail"
+          class="flex mt-2 justify-center items-center"
+        ></app-product-desctiption-table>
+      </div>
+
+      <div class="w-full h-auto flex flex-col mt-3">
+        <div class="flex justify-between">
+          <h1 class="md:text-xl text-sm ml-10 mt-3">Part Sales Info</h1>
+          <div class="flex flex-row justify-between w-auto mr-12">
+            <button
+              class="bg-blue-600 hover:bg-green-500 rounded-xl mr-5 text-white lg:h-auto h-12 sm:h-10 sm:text-sm sm:py-1 sm:px-3 shadow-lg cursor-pointer"
+              (click)="onClickShowSaleinfo()"
+            >
+              Show Sales Info
+            </button>
+            <button
+              class="bg-blue-600 hover:bg-green-500 rounded-xl text-white lg:h-auto h-12 sm:h-10 sm:text-sm sm:py-1 sm:px-3 shadow-lg cursor-pointer"
+              (click)="exportToExcel()"
+            >
+              Export Data
+            </button>
+          </div>
+        </div>
+        <app-product-sale-info
+          [SalesInfo]="SalesInfo"
+          class="flex justify-center items-center"
+        ></app-product-sale-info>
+      </div>
+    </div>
+  </div>
+</div>

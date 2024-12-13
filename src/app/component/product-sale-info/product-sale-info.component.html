@@ -1,0 +1,92 @@
+<div class=" w-[90vw] mt-2 mb-5 h-auto ">
+  <p-table
+    [value]="SalesInfo[0]"
+    [rows]="3"
+    styleClass="p-datatable-gridlines"
+    [responsiveLayout]="'scroll'"
+    [scrollable]="true"
+    scrollHeight="400px"
+    class="p-datatable-gridlines"
+  >
+    <!-- Table Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Month</th>
+        <th>Closing Stocks</th>
+        <th>Workshop Sale</th>
+        <th>Counter</th>
+        <th>Stock Transfer Out</th>
+        <th>Adjustment Out</th>
+        <th>Paid Sale</th>
+        <th>Warranty Sale</th>
+        <th>FOC Sales</th>
+        <th>Goodwill Sale</th>
+        <th>Normal Purchase</th>
+        <th>Stock Transfer In</th>
+        <th>Jobcard Return Value</th>
+        <th>Counter Sale Return</th>
+        <th>Emergency Purchase</th>
+        <th>VOR Purchase</th>
+        <th>Co Dealer Purchase</th>
+        <th>OEM Purchase</th>
+        <th>IDK</th>
+        <th>Others</th>
+        
+      </tr>
+    </ng-template>
+
+    <!-- Table Body -->
+    <ng-template pTemplate="body" let-sale let-rowIndex="rowIndex">
+      <tr *ngIf="rowIndex < SalesInfo[0].length">
+        <!-- First array data -->
+        <td>{{ sale.Month }}</td>
+        <td>{{ sale.Stocks }}</td>
+        <td>{{ sale.WorkshopSale }}</td>
+        <td>{{ sale.Counter }}</td>
+        <td>{{ sale.StockTransferOut }}</td>
+        <td>{{ sale.AdjustmentOut }}</td>
+        <td>{{ sale.PaidSale }}</td>
+        <td>{{ sale.WarrantySale }}</td>
+        <td>{{ sale.FOCSales }}</td>
+        <td>{{ sale.GoodwillSale }}</td>
+        <td>{{ sale.NormalPurchase }}</td>
+        <td>{{ sale.StockTransferIn }}</td>
+        <td>{{ sale.JobcardReturnValue }}</td>
+        <td>{{ sale.CounterSaleReturn }}</td>
+        <td>{{ sale.EmergencyPurchase }}</td>
+        <td>{{ sale.VORPurchase }}</td>
+        <td>{{ sale.CoDlrPurchase }}</td>
+        <td>{{ sale.OEMPurchase }}</td>
+        <td>{{ sale.idk }}</td>
+        <td>{{ sale.Others }}</td>
+        
+      </tr>
+      
+      <!-- Totals row -->
+      <tr *ngIf="rowIndex === SalesInfo[0].length - 1"  [style.backgroundColor]="'#d4f7d4'">
+        <td>{{ SalesInfo[1][0].Month }}</td>
+        <td>{{ SalesInfo[1][0].Stocks }}</td>
+        <td>{{ SalesInfo[1][0].WorkshopSale }}</td>
+        <td>{{ SalesInfo[1][0].Counter }}</td>
+        <td>{{ SalesInfo[1][0].StockTransferOut }}</td>
+        <td>{{ SalesInfo[1][0].AdjustmentOut }}</td>
+        <td>{{ SalesInfo[1][0].PaidSale }}</td>
+        <td>{{ SalesInfo[1][0].WarrantySale }}</td>
+        <td>{{ SalesInfo[1][0].FOCSales }}</td>
+        <td>{{ SalesInfo[1][0].GoodwillSale }}</td>
+        <td>{{ SalesInfo[1][0].NormalPurchase }}</td>
+        <td>{{ SalesInfo[1][0].StockTransferIn }}</td>
+        <td>{{ SalesInfo[1][0].JobcardReturnValue }}</td>
+        <td>{{ SalesInfo[1][0].CounterSaleReturn }}</td>
+        <td>{{ SalesInfo[1][0].EmergencyPurchase }}</td>
+        <td>{{ SalesInfo[1][0].VORPurchase }}</td>
+        <td>{{ SalesInfo[1][0].CoDlrPurchase }}</td>
+        <td>{{ SalesInfo[1][0].OEMPurchase }}</td>
+        <td>{{ SalesInfo[1][0].idk }}</td>
+        <td>{{ SalesInfo[1][0].Others }}</td>
+       
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>
