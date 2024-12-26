@@ -22,3 +22,20 @@ select.w-20.lg\:w-36.h-8.rounded.flex.items-center.justify-center.ng-pristine.ng
   padding: 5px;
   background: #f9f9f9;
 }
+
+:host ::ng-deep input.p-element.p-inputtext.p-component {
+  padding: 3px !important;
+  padding-left: 10px !important;
+  border-radius: 4px !important;
+  
+
+}
+select.w-36.h-8.rounded.border.ng-dirty.ng-valid.ng-touched {
+  font-size: 12px;
+}
+select.w-36.h-8.rounded.ng-dirty.ng-valid.ng-touched {
+  font-size: 13px;
+}
+select.w-36.sm\:w-20.lg\:w-36.h-8.rounded.border.ng-untouched.ng-pristine.ng-valid {
+  font-size: 13px;
+}

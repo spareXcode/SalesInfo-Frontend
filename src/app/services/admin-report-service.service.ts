@@ -9,9 +9,11 @@ export class AdminReportServiceService {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'http://192.168.1.26:3002/'
+  private apiUrl = 'http://103.30.72.109:8087/'
+  // private apiUrl = 'http://192.168.1.22:8093/'
 
 
+  
   getBrandData(): Observable<any>{
    return this.http.get(`${this.apiUrl}brands`)
   }

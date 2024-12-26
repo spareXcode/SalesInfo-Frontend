@@ -1,0 +1,111 @@
+ 
+
+
+  <div class="w-[90vw] mt-2 mb-5 h-auto">
+    <p-table
+      [value]="SalesInfo[1]"
+      [rows]="3"
+      styleClass="p-datatable-gridlines"
+      [responsiveLayout]="'scroll'"
+      [scrollable]="true"
+      scrollHeight="400px"
+      class="p-datatable-gridlines"
+    >
+      <!-- Table Header -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="locationid" style="width:20%">Location
+            <p-sortIcon field="locationid" />
+          </th>
+          <th pSortableColumn="Months" style="width:20%">Total
+            <p-sortIcon field="Months" />
+          </th>
+          <th pSortableColumn="ClosingStocks" style="width:20%">Closing Stocks
+            <p-sortIcon field="ClosingStocks" />
+          </th>
+          <th pSortableColumn="WorkshopSale">Workshop Sale
+            <p-sortIcon field="WorkshopSale" />
+          </th>
+          <th pSortableColumn="Counter">Counter
+            <p-sortIcon field="Counter" />
+          </th>
+          <th pSortableColumn="StockTransferOut">Stock Transfer Out
+            <p-sortIcon field="StockTransferOut" />
+          </th>
+          <th pSortableColumn="AdjustmentOut">Adjustment Out
+            <p-sortIcon field="AdjustmentOut" />
+          </th>
+          <th pSortableColumn="PaidSale">Paid Sale
+            <p-sortIcon field="PaidSale" />
+          </th>
+          <th pSortableColumn="WarrantySale">Warranty Sale
+            <p-sortIcon field="WarrantySale" />
+          </th>
+          <th pSortableColumn="FOCSales">FOC Sales
+            <p-sortIcon field="FOCSales" />
+          </th>
+          <th pSortableColumn="GoodwillSale">Goodwill Sale
+            <p-sortIcon field="GoodwillSale" />
+          </th>
+          <th pSortableColumn="NormalPurchase">Normal Purchase
+            <p-sortIcon field="NormalPurchase" />
+          </th>
+          <th pSortableColumn="StockTransferIn">Stock Transfer In
+            <p-sortIcon field="StockTransferIn" />
+          </th>
+          <th pSortableColumn="JobcardReturnValue">Jobcard Return Value
+            <p-sortIcon field="JobcardReturnValue" />
+          </th>
+          <th pSortableColumn="CounterSaleReturn">Counter Sale Return
+            <p-sortIcon field="CounterSaleReturn" />
+          </th>
+          <th pSortableColumn="EmergencyPurchase">Emergency Purchase
+            <p-sortIcon field="EmergencyPurchase" />
+          </th>
+          <th pSortableColumn="VORPurchase">VOR Purchase
+            <p-sortIcon field="VORPurchase" />
+          </th>
+          <th pSortableColumn="CoDlrPurchase">Co Dealer Purchase
+            <p-sortIcon field="CoDlrPurchase" />
+          </th>
+          <th pSortableColumn="OEMPurchase">OEM Purchase
+            <p-sortIcon field="OEMPurchase" />
+          </th>
+          <th pSortableColumn="idk">IDK
+            <p-sortIcon field="idk" />
+          </th>
+          <th pSortableColumn="Others">Others
+            <p-sortIcon field="Others" />
+          </th>
+        </tr>
+      </ng-template>
+  
+      <!-- Table Body -->
+      <ng-template pTemplate="body" let-sale let-rowIndex="rowIndex">
+        <tr [style.backgroundColor]="'#d4f7d4'">
+          <td>{{ sale.locationName }}</td>
+          <td>{{ sale.Months }}</td>
+          <td>{{ sale.ClosingStocks }}</td>
+          <td>{{ sale.WorkshopSale }}</td>
+          <td>{{ sale.Counter }}</td>
+          <td>{{ sale.StockTransferOut }}</td>
+          <td>{{ sale.AdjustmentOut }}</td>
+          <td>{{ sale.PaidSale }}</td>
+          <td>{{ sale.WarrantySale }}</td>
+          <td>{{ sale.FOCSales }}</td>
+          <td>{{ sale.GoodwillSale }}</td>
+          <td>{{ sale.NormalPurchase }}</td>
+          <td>{{ sale.StockTransferIn }}</td>
+          <td>{{ sale.JobcardReturnValue }}</td>
+          <td>{{ sale.CounterSaleReturn }}</td>
+          <td>{{ sale.EmergencyPurchase }}</td>
+          <td>{{ sale.VORPurchase }}</td>
+          <td>{{ sale.CoDlrPurchase }}</td>
+          <td>{{ sale.OEMPurchase }}</td>
+          <td>{{ sale.idk }}</td>
+          <td>{{ sale.Others }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  

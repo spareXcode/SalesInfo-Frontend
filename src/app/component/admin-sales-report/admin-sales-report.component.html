@@ -1,11 +1,24 @@
 <div class="relative w-full h-full">
   <!-- Loading spinner -->
-  <!-- <div
+  <div
     *ngIf="isLoading"
     class="absolute inset-0 bg-white bg-opacity-70 z-50 flex items-center justify-center"
   >
-    <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
-  </div> -->
+    <ng-container *ngIf="!showMessage; else messageTemplate">
+      <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+    </ng-container>
+    <ng-template #messageTemplate>
+      <div class="text-center">
+        <p class="text-xl">Oops!! Connection Error Refresh Again</p>
+        <button
+          class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          (click)="refreshPage()"
+        >
+          Refresh
+        </button>
+      </div>
+    </ng-template>
+  </div>
 
   <div class="w-full h-full flex flex-col overflow-y-auto overflow-x-hidden">
     <app-topbar></app-topbar>
@@ -40,78 +53,98 @@
         class="md:flex md:flex-row md:items-center gap-3 pl-2 grid grid-cols-2 sm:grid-cols-2 sm: gap-x-10 sm:gap-5"
         [ngClass]="{ hidden: !isMenuOpen, flex: isMenuOpen }"
       >
-        <select
-          name=""
-          id=""
-          class="w-36 sm:w-20 h-8 rounded"
-          formControlName="BrandID"
-          (change)="onSelectionChangeBrandData()"
-        >
-          <option value="" disabled selected hidden>Brand</option>
-          @if (BrandData.length == 0) {
-          <option value="">No Brands Available</option>
-          } @else { @for (brand of BrandData; track $index) {
-          <option value="{{ brand.bigid }}">{{ brand.vcbrand }}</option>
-          } }
-        </select>
-        <select
-          name=""
-          id=""
-          class="w-36 sm:w-20 h-8 rounded"
-          formControlName="DealerID"
-          (change)="onSelectionChangeDealerData()"
-        >
-          <option value="" disabled selected hidden>Dealer</option>
-          @if (DealerData.length == 0) {
-          <option value="">No Dealer Available</option>
-          } @else { @for (Dealer of DealerData; track $index) {
-          <option value="{{ Dealer.dealerid }}">{{ Dealer.dealer }}</option>
-          } }
-        </select>
-        <select
-          name=""
-          id=""
-          class="w-36 sm:w-20 lg:w-36 h-8 rounded"
-          formControlName="LocationID"
-          (change)="onSelectionChangeLocationData()"
-        >
-          <option value="" class="text-gray-300" disabled selected hidden>
-            Select Location
-          </option>
-          @if (LocationData == 0) {
-          <option value="">No Location Available</option>
-          } @else { @for (location of LocationData; track $index) {
-          <option [value]="location.locationid">{{ location.location }}</option>
-          } }
-        </select>
-        <input
-          type="text"
-          class="w-36 sm:w-24 h-8 rounded p-2"
-          formControlName="FormDate"
-          placeholder="From Date"
-          onfocus="(this.type='Month')"
-          onblur="(this.type='text')"
-        />
-        <input
-          type="text"
-          class="w-36 sm:w-24 h-8 rounded p-2"
-          formControlName="ToDate"
-          placeholder="To Date"
-          onfocus="(this.type='Month')"
-          onblur="(this.type='text')"
-        />
-        <input
-          type="text"
-          class="w-36 lg:w-64 h-8 rounded p-4"
-          placeholder="Enter Part Number"
-          formControlName="PartNumber"
-        />
-        <button
-          class="bg-blue-600 hover:bg-green-500 rounded-xl text-white w-24 sm:h-10 h-7 mb-4 mt-4 sm:text-sm shadow-lg cursor-pointer"
-          (click)="onSubmitAdminInputData()"
-        >
-          Submit
-        </button>
+        
+      <select
+      class="w-36 ml-4 h-8 rounded"
+      [ngClass]="{'border-red-500 border-2': AdminSalesReportInputData.get('BrandID')?.touched && AdminSalesReportInputData.get('BrandID')?.invalid}"
+      formControlName="BrandID"
+      (change)="onSelectionChangeBrandData()"
+    >
+      <option value="" disabled selected hidden class="text-gray-300 text-sm">Brand</option>
+      @if (BrandData.length == 0) {
+        <option class="text-sm" value="">No Brands Available</option>
+      } @else {
+        @for (brand of BrandData; track $index) {
+          <option class="text-sm" value="{{ brand.bigid }}">{{ brand.vcbrand }} </option>
+        }
+      }
+    </select>
+    
+    <select
+      class="w-36  h-8 rounded border"
+      [ngClass]="{'border-red-500 border-2': AdminSalesReportInputData.get('DealerID')?.touched && AdminSalesReportInputData.get('DealerID')?.invalid}"
+      formControlName="DealerID"
+      (click)="onSelectionChangeDealerData()"
+    >
+      <option value="" disabled selected hidden>Dealer</option>
+      @if (DealerData.length == 0) {
+        <option class="text-sm" value="">No Dealer Available</option>
+      } @else {
+        @for (Dealer of DealerData; track $index) {
+          <option class="text-sm" value="{{ Dealer.dealerid }}">{{ Dealer.dealer }}</option>
+        }
+      }
+    </select>
+    
+    <select
+      class="w-36 sm:w-20 lg:w-36 h-8 rounded border"
+      [ngClass]="{'border-red-500 border-2': AdminSalesReportInputData.get('LocationID')?.touched && AdminSalesReportInputData.get('LocationID')?.invalid &&
+      AdminSalesReportInputData.get('LocationID')?.value !== '' &&
+      AdminSalesReportInputData.get('LocationID')?.value !== 'All Location'}"
+      formControlName="LocationID"
+      (change)="onSelectionChangeLocationData()"
+    >
+      <option value="" class="text-gray-300 text-sm" disabled selected hidden>Select Location</option>
+      @if (LocationData == 0) {
+        <option class="text-sm" value="">No Location Available</option>
+      } @else {
+        <option class="text-sm" value="">All Location</option>
+        @for (location of LocationData; track $index) {
+          <option class="text-sm" [value]="location.locationid">{{ location.location }}</option>
+        }
+      }
+    </select>
+    <p-calendar
+      view="month"
+      placeholder="From Date"
+      [styleClass]="'w-36 sm:w-28 md-24 h-8 lg:w-36 text-sm cursor-default'"
+      [ngClass]="{'border-red-500 border-2': AdminSalesReportInputData.get('FormDate')?.touched && AdminSalesReportInputData.get('FormDate')?.invalid}"
+      formControlName="FormDate"
+      [iconDisplay]="'input'"
+      dateFormat="mm/yy"
+      [showIcon]="true"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+    ></p-calendar>
+    
+    <p-calendar
+      view="month"
+      placeholder="To Date"
+      formControlName="ToDate"
+      [styleClass]="'w-36 sm:w-28 h-8 md:w-24 lg:w-36 text-sm cursor-default'"
+      [ngClass]="{'border-red-500 border-2': AdminSalesReportInputData.get('ToDate')?.touched && AdminSalesReportInputData.get('ToDate')?.invalid}"
+      [iconDisplay]="'input'"
+      [showIcon]="true"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      dateFormat="mm/yy"
+    ></p-calendar>
+    
+    <input
+      type="text"
+      class="w-36 lg:w-64 h-8 text-sm rounded p-4 border"
+      [ngClass]="{'border-red-500 border-2': AdminSalesReportInputData.get('PartNumber')?.touched && AdminSalesReportInputData.get('PartNumber')?.invalid}"
+      placeholder="Enter Part Number"
+      formControlName="PartNumber"
+    />
+    
+    <input type="button"
+      class="bg-blue-600 hover:bg-green-500 rounded-xl text-white w-24 sm:h-10 h-7 mb-4 mt-4 sm:text-sm shadow-lg cursor-pointer"
+      (click)="onSubmitAdminInputData()" value="Submit"
+    >
+    <!-- <p-button label="Submit" (click)="onSubmitAdminInputData()" /> -->
+    
+    
       </div>
     </div>
 
@@ -127,7 +160,7 @@
 
         <!-- Table -->
         <app-product-desctiption-table
-          [PartDetails]="PartDetail"
+          [PartDetails]="this.PartDetail"
           class="flex mt-2 justify-center items-center"
         ></app-product-desctiption-table>
       </div>
@@ -143,6 +176,12 @@
               Show Sales Info
             </button>
             <button
+              class="bg-blue-600 hover:bg-green-500 rounded-xl mr-5 text-white lg:h-auto h-12 sm:h-10 sm:text-sm sm:py-1 sm:px-3 shadow-lg cursor-pointer"
+              (click)="onclicktotal()"
+            >
+              Click For Total
+            </button>
+            <button
               class="bg-blue-600 hover:bg-green-500 rounded-xl text-white lg:h-auto h-12 sm:h-10 sm:text-sm sm:py-1 sm:px-3 shadow-lg cursor-pointer"
               (click)="exportToExcel()"
             >
@@ -154,6 +193,11 @@
           [SalesInfo]="SalesInfo"
           class="flex justify-center items-center"
         ></app-product-sale-info>
+        <app-totalsum
+          [SalesInfo]="SalesInfo"
+          *ngIf="istotal"
+          class="flex justify-center items-center"
+        ></app-totalsum>
       </div>
     </div>
   </div>
